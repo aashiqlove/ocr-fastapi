@@ -37,4 +37,10 @@ jobs:
           sleep 60  # Check every minute
         done &
 
-  
+    - name: Wait for manual stop
+      run: |
+        echo "App is running. Go to Actions -> This workflow -> Re-run jobs -> Click 'Cancel workflow' to stop the app."
+        sleep 1800  # Run for 30 minutes max
+
+
+        
