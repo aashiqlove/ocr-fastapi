@@ -3,7 +3,7 @@ name: FastAPI OCR App
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'  # Run every 5 minutes
+    - cron: '*/1 * * * *'  # Run every 5 minutes
 
 jobs:
   run-app:
@@ -25,7 +25,7 @@ jobs:
       run: |
         uvicorn main:app --host 0.0.0.0 --port 3000 &
         echo $! > app.pid
-        sleep 15  # Wait for app to start
+        sleep 100  # Wait for app to start
 
     - name: Keep app running
       run: |
