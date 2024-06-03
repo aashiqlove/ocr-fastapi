@@ -3,7 +3,7 @@ name: FastAPI OCR App
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/1 * * * *'  # Run every 5 minutes
+    - cron: '*/10 * * * *'  # Run every 5 minutes
 
 jobs:
   run-app:
@@ -14,7 +14,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.9'
 
     - name: Install dependencies
       run: |
@@ -25,7 +25,7 @@ jobs:
       run: |
         uvicorn main:app --host 0.0.0.0 --port 3000 &
         echo $! > app.pid
-        sleep 1800  # Wait for app to start
+        sleep 10  # Wait for app to start
 
     - name: Keep app running
       run: |
@@ -34,7 +34,7 @@ jobs:
             echo "App stopped unexpectedly"
             exit 1
           fi
-          sleep 6000  # Check every minute
+          sleep 60  # Check every minute
         done &
 
     - name: Wait for manual stop
